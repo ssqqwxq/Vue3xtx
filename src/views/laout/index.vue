@@ -1,18 +1,16 @@
 <script setup>
-
-
-
-
+import LayoutNav from './components/LayoutNav.vue'
+import LayoutHeader from './components/LayoutHeader.vue'
+import LayoutFooter from './components/LayoutFooter.vue'
 </script>
 
 <template>
-    <div class="text">我是首页</div>
-    <!-- 一级路由出口 -->
+
+    <LayoutNav />
+    <LayoutHeader />
+    <!-- 二级路由出口 -->
     <RouterView />
+    <LayoutFooter />
 </template>
 
-<style scoped lang="scss">
-.text {
-    color: $priceColor;
-}
-</style>
+<style scoped lang="scss"></style>
