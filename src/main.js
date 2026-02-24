@@ -8,9 +8,9 @@ import { getCategoryAPI } from '@/api/http'
 
 import App from './App.vue'
 import router from './router'
-getCategoryAPI().then(res => {
-    console.log(res);
-})
+// getCategoryAPI().then(res => {
+//     console.log(res);
+// })//测试接口
 
 const app = createApp(App)
 app.use(createPinia())
