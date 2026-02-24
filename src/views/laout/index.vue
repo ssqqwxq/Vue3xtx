@@ -6,8 +6,13 @@
 </script>
 
 <template>
-    <div>我是首页</div>
+    <div class="text">我是首页</div>
+    <!-- 一级路由出口 -->
     <RouterView />
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.text {
+    color: $priceColor;
+}
+</style>
