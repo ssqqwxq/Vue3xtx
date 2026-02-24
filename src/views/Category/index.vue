@@ -1,13 +1,12 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+
 
 
 
 </script>
 
 <template>
-
-  <RouterView />
+    <div>我是分类</div>
 </template>
 
 <style scoped></style>

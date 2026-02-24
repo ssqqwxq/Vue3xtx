@@ -1,13 +1,12 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+
 
 
 
 </script>
 
 <template>
-
-  <RouterView />
+    <div>我是home</div>
 </template>
 
 <style scoped></style>
