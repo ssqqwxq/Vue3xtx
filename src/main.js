@@ -1,6 +1,7 @@
 
 import '@/styles/common.scss'// 全局样式
 
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { getCategoryAPI } from '@/api/http'
