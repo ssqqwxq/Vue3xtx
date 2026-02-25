@@ -2,7 +2,7 @@
 import { getCategoryAPI } from '@/api/layout'
 import { ref, onMounted } from 'vue'
 import { useCategoryStore } from '@/stores/category'
-
+// 引入pinia的导航信息
 const categoryStore = useCategoryStore()
 
 </script>

@@ -6,7 +6,6 @@ const scrollTop = ref(0)
 const handleScroll = () => {
     // 获取垂直滚动距离（核心代码）
     scrollTop.value = window.scrollY
-    // 如果要获取水平滚动：scrollTop.value = window.scrollX
 }
 // 组件挂载后给浏览器监听滚动事件
 onMounted(() => {
@@ -16,17 +15,17 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll)
 })
-
+// 引入pinia的导航信息
 import { useCategoryStore } from '@/stores/category'
 
 const categoryStore = useCategoryStore()
+
 </script>
 
 <template>
     <div class="app-header-sticky " :class="{ show: scrollTop > 185 }">
         <!-- 实时显示滚动距离 -->
         <div>页面滚动了：{{ scrollTop }} px</div>
-
         <div class="container">
             <RouterLink class="logo" to="/" />
             <!-- 导航区域 -->
