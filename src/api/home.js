@@ -17,3 +17,9 @@ export const getHotAPI = () => {
         url: '/home/hot'
     })
 }
+// 获取商品列表
+export const getGoodsAPI = () => {
+    return instance({
+        url: '/home/goods'
+    })
+}
