@@ -3,6 +3,7 @@
 import HomePanel from './HomePanel.vue'
 import { getGoodsAPI } from '@/api/home'
 import { ref, onMounted } from 'vue'
+import GoodItem from './GoodItem.vue'
 
 const goodsProduct = ref([])
 const getGoods = async () => {
@@ -27,15 +28,10 @@ onMounted(() => {
                         <span>{{ cate.saleInfo }}</span>
                     </strong>
                 </RouterLink>
+                <!-- 商品列表区域 -->
                 <ul class="goods-list">
                     <li v-for="good in cate.goods" :key="good.id">
-                        <RouterLink to="/" class="goods-item">
-                            <!-- 自定义指令 图片懒加载 -->
-                            <img v-img-lazy="good.picture" src="/src/assets/logo.svg" alt="">
-                            <p class="name ellipsis">{{ good.name }}</p>
-                            <p class="desc ellipsis">{{ good.desc }}</p>
-                            <p class="price">&yen;{{ good.price }}</p>
-                        </RouterLink>
+                        <GoodItem :good="good"></GoodItem>
                     </li>
                 </ul>
             </div>
@@ -131,41 +127,7 @@ onMounted(() => {
             }
         }
 
-        .goods-item {
-            display: block;
-            width: 220px;
-            padding: 20px 30px;
-            text-align: center;
-            transition: all .5s;
 
-            &:hover {
-                transform: translate3d(0, -3px, 0);
-                box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
-            }
-
-            img {
-                width: 160px;
-                height: 160px;
-            }
-
-            p {
-                padding-top: 10px;
-            }
-
-            .name {
-                font-size: 16px;
-            }
-
-            .desc {
-                color: #999;
-                height: 29px;
-            }
-
-            .price {
-                color: $priceColor;
-                font-size: 20px;
-            }
-        }
     }
 }
 </style>
