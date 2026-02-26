@@ -1,8 +1,11 @@
 import instance from '@/utils/http'
-// 轮播图
-export function getBannerAPI() {
+// 轮播图     
+export function getBannerAPI(distributionSite) {
     return instance({
-        url: '/home/banner'
+        url: '/home/banner',
+        params: {
+            distributionSite    // 首页默认为1 商品分类页为2
+        }
     })
 }
 // 新鲜好物
