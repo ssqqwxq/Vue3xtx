@@ -30,6 +30,12 @@ const getGoddsList = async () => {
 onMounted(() => {
     getGoddsList()
 })
+//  tab切换回调
+const changeTab = () => {
+    // console.log(reqData.value.sortField);
+    reqData.value.page = 1
+    getGoddsList()
+}
 </script>
 
 <template>
@@ -44,7 +50,9 @@ onMounted(() => {
             </el-breadcrumb>
         </div>
         <div class="sub-container">
-            <el-tabs>
+            <!-- v-model="reqData.sortField" 组件的「当前激活标签页的 name 属性」和 reqData.sortField 做了双向绑定
+            @tab-change 切换name 时触发-->
+            <el-tabs @tab-change="changeTab" v-model="reqData.sortField">
                 <el-tab-pane label="最新商品" name="publishTime"></el-tab-pane>
                 <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
                 <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
