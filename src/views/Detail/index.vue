@@ -3,6 +3,7 @@ import { getDetail } from '@/api/detail'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router';
 import DetailHot from './componens/DetailHot.vue';
+import ImgView from '@/components/imgView/index.vue'
 const route = useRoute()
 const goods = ref({})
 const getGoods = async () => {
@@ -37,7 +38,7 @@ onMounted(() => {
                     <div class="goods-info">
                         <div class="media">
                             <!-- 图片预览区 -->
-
+                            <imgView></imgView>
                             <!-- 统计数量 -->
                             <ul class="goods-sales">
                                 <li>
