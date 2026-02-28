@@ -2,6 +2,7 @@
 import { getDetail } from '@/api/detail'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router';
+import DetailHot from './componens/DetailHot.vue';
 const route = useRoute()
 const goods = ref({})
 const getGoods = async () => {
@@ -15,6 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
+
     <div class="xtx-goods-page" v-if="goods.details">
         <div class="container">
             <div class="bread-container">
@@ -118,7 +120,10 @@ onMounted(() => {
                         </div>
                         <!-- 24热榜+专题推荐 -->
                         <div class="goods-aside">
-
+                            <!-- 24小时热榜 -->
+                            <DetailHot></DetailHot>
+                            <!-- 周热榜 -->
+                            <DetailHot></DetailHot>
                         </div>
                     </div>
                 </div>
