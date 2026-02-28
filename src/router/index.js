@@ -2,7 +2,7 @@
 // createRouter：创建router实例对象
 // createWebHistory：创建history模式的路由
 import { createRouter, createWebHistory } from 'vue-router'
-
+import { getCategoryAPI } from '@/api/category'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,5 +26,8 @@ const router = createRouter({
     }
   ],
 })
+
+
+
 
 export default router
