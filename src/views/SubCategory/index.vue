@@ -36,6 +36,21 @@ const changeTab = () => {
     reqData.value.page = 1
     getGoddsList()
 }
+// 无限加载商品列表
+const disabled = ref(false)
+const load = async () => {
+    // console.log('无限加载');
+    reqData.value.page++
+    // 最新一页数据
+    const res = await getSubCategoryAPI(reqData.value)
+    // console.log(res.result);
+    // 新老数据拼接
+    goodsList.value = [...goodsList.value, ...res.result.items]
+    // 加载到最后一页没有数据 停止监听
+    if (res.result.items.length === 0) {
+        disabled.value = true
+    }
+}
 </script>
 
 <template>
@@ -57,7 +72,8 @@ const changeTab = () => {
                 <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
                 <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
             </el-tabs>
-            <div class="body">
+            <!-- v-infinite-scroll="load"  滚动到底部时自动执行加载方法 /  :infinite-scroll-disabled="disabled" 禁止无限滚动 -->
+            <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
                 <!-- 商品列表-->
                 <GoodItem v-for="goods in goodsList" :key="goods.id" :good="goods"></GoodItem>
             </div>
