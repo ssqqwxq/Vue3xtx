@@ -29,6 +29,12 @@ const router = createRouter({
       component: () => import('@/views/login/index.vue')
     }
   ],
+  // 路由行为定制 切换路由时默认滚动在顶部
+  scrollBehavior() {
+    return {
+      top: 0
+    }
+  }
 })
 
 
