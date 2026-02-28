@@ -1,17 +1,29 @@
 <script setup>
-
-
+import { getCategoryFilterAPI } from '@/api/category'
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+// 获取面包屑导航数据 (二级分类列表的全部数据)
+const filterData = ref({})
+const getFilterData = async () => {
+    const res = await getCategoryFilterAPI(route.params.id)
+    filterData.value = res.result
+    console.log(res.result);
+}
+onMounted(() => {
+    getFilterData()
+})
 </script>
 
 <template>
     <div class="container ">
-        <!-- 面包屑 -->
+        <!-- 二级分类面包屑 -->
         <div class="bread-container">
             <el-breadcrumb separator=">">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item :to="{ path: '/' }">居家
+                <el-breadcrumb-item :to="{ path: `/Category/${filterData.parentId}` }">{{ filterData.parentName }}
                 </el-breadcrumb-item>
-                <el-breadcrumb-item>居家生活用品</el-breadcrumb-item>
+                <el-breadcrumb-item>{{ filterData.name }}</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="sub-container">
