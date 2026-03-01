@@ -1,12 +1,13 @@
 <script setup>
+import { defineProps } from 'vue'
 // 图片列表
-const imageList = [
-    "https://yanxuan-item.nosdn.127.net/d917c92e663c5ed0bb577c7ded73e4ec.png",
-    "https://yanxuan-item.nosdn.127.net/e801b9572f0b0c02a52952b01adab967.jpg",
-    "https://yanxuan-item.nosdn.127.net/b52c447ad472d51adbdde1a83f550ac2.jpg",
-    "https://yanxuan-item.nosdn.127.net/f93243224dc37674dfca5874fe089c60.jpg",
-    "https://yanxuan-item.nosdn.127.net/f881cfe7de9a576aaeea6ee0d1d24823.jpg"
-]
+defineProps({
+    imageList: {
+        type: Array,
+        default: () => []
+    }
+})
+
 import { ref, watch } from 'vue'
 // 1.通过小图切换大图
 const activeIndex = ref(0)
@@ -18,13 +19,13 @@ const mouseEnterFn = (i) => {
 // 2.获取鼠标相对位置
 import { useMouseInElement } from '@vueuse/core'
 const target = ref(null)
-// x y 是否在元素外
+// x, y, 是否在元素外
 const { elementX, elementY, isOutside } = useMouseInElement(target)
 // 3. 控制滑块跟随鼠标移动（监听elementX/Y变化，一旦变化 重新设置left/top）
-const left = ref(0)
+const left = ref(0) // 蒙层距离左边px
 const top = ref(0)
 // 放大镜
-const positionX = ref(0)
+const positionX = ref(0) // 大图距离左边px
 const positionY = ref(0)
 watch([elementX, elementY, isOutside], () => {
     if (isOutside.value) {
@@ -39,7 +40,6 @@ watch([elementX, elementY, isOutside], () => {
     if (elementY.value >= 100 && elementY.value <= 300) {
         top.value = elementY.value - 100
     }
-
     // 处理边界 规定移动范围在100-300之间 也就是蒙层在最左边的中心点是100在最右边中心点是300
     if (elementX.value > 300) { left.value = 200 }
     if (elementX.value < 100) { left.value = 0 }
@@ -74,8 +74,8 @@ watch([elementX, elementY, isOutside], () => {
         <div class="large" :style="[
             {
                 backgroundImage: `url(${imageList[activeIndex]})`,
-                backgroundPositionX: `${positionX}px`,
-                backgroundPositionY: `${positionY}px`,
+                backgroundPositionX: `${positionX}px`,  //控制放大图的水平偏移
+                backgroundPositionY: `${positionY}px`, //控制放大图的垂直偏移
             },
         ]" v-show="!isOutside"></div>
     </div>
