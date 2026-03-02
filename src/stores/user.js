@@ -14,4 +14,8 @@ export const useUserStore = defineStore('user', () => {
         userInfo,
         getUserInfo
     }
-})
+},
+    // 持久化 存入本地
+    {
+        persist: true,
+    })
