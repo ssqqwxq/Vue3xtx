@@ -1,7 +1,7 @@
 
 // 把懒加载定义成插件引入到main.js中全局使用
 export const lazyPlugin = {
-    install(app) {     //   install(app){}固定写法
+    install(app) {     //   install(app){} 插件化的固定写法
         // 自定义指令 图片懒加载逻辑
         app.directive('img-lazy', {
             mounted(el, binding) {

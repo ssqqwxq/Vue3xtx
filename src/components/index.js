@@ -2,6 +2,7 @@ import ImgView from '@/components/imgView/index.vue'
 import Xtx from '@/components/XtxSku/index.vue'
 // 把商品详情的 规格与图片 封装成全局组件
 export const componentPlugin = {
+    // install(app){} 插件化的固定写法
     install(app) {
         // app.component(组件名字，配置对象)
         app.component('XtxImgView', ImgView)
