@@ -3,7 +3,8 @@ import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
-import { loginApi } from '@/api/login.js'
+import { useUserStore } from '@/stores/user.js'
+import { dataType } from 'element-plus/es/components/table-v2/src/common'
 // 表单数据对象
 const userInfo = ref({
     account: 'xiaotuxian001',
@@ -33,10 +34,11 @@ const rules = {
 }
 const formRef = ref()
 const router = useRouter()
+const userStore = useUserStore()
 // 登录
 const login = async () => {
     await formRef.value.validate()
-    await loginApi(userInfo.value)
+    userStore.getUserInfo(userInfo.value) // pinia 异步发请求获取数据
     router.replace('/')
     ElMessage.success('登录成功')
 }
