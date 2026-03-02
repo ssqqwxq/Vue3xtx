@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
 import { useUserStore } from '@/stores/user.js'
-import { dataType } from 'element-plus/es/components/table-v2/src/common'
+
 // 表单数据对象
 const userInfo = ref({
     account: 'xiaotuxian001',

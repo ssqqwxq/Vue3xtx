@@ -1,8 +1,13 @@
 <script setup>
-import router from '@/router';
 import { useUserStore } from '@/stores/user';
 
 const userStore = useUserStore()
+// 退出登录
+const confirm = () => {
+    // 清空pinia的用户信息
+    userStore.clearUserInfo()
+    ElMessage.success('退出登录')
+}
 </script>
 
 <template>
@@ -14,7 +19,8 @@ const userStore = useUserStore()
                     <li><a href="javascript:;"><i class=" iconfont icon-user"></i>{{ userStore.userInfo.nickname }}</a>
                     </li>
                     <li>
-                        <el-popconfirm title="确认退出吗?" confirm-button-text="确认" cancel-button-text="取消">
+                        <el-popconfirm @confirm="confirm" title="确认退出吗?" confirm-button-text="确认"
+                            cancel-button-text="取消">
                             <template #reference>
                                 <a href="javascript:;">退出登录</a>
                             </template>

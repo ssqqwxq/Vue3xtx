@@ -17,9 +17,9 @@ const app = createApp(App)
 const pinia = createPinia()
 // 注册持久化插件
 pinia.use(piniaPluginPersistedstate)
+app.use(router)
 app.use(pinia)
 app.use(componentPlugin)
-app.use(router)
 app.use(lazyPlugin)
 app.mount('#app')
 
