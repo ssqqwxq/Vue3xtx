@@ -1,5 +1,33 @@
 <script setup>
-
+import { ElMessage } from 'element-plus';
+import { ref } from 'vue'
+// 表单数据对象
+const userInfo = ref({
+    account: '1311111111',
+    password: '123456',
+    agree: true   // 同意协议：必选，字段名为 agree
+})
+// 校验规则
+const rules = {
+    account: [
+        { required: true, message: '不能为空', trigger: 'blur' }
+    ],
+    password: [
+        { required: true, message: '不能为空', trigger: 'blur' },
+        { min: 6, max: 24, message: '密码长度6-24位' }
+    ],
+    agree: [
+        {           // 校验规则，校验值，必须回调
+            validator: (rule, val, callback) => {
+                if (val) {
+                    callback()
+                } else {
+                    callback(new Error('请先同意协议'))
+                }
+            }
+        }
+    ],
+}
 </script>
 
 
@@ -24,15 +52,16 @@
                 </nav>
                 <div class="account-box">
                     <div class="form">
-                        <el-form label-position="right" label-width="60px" status-icon>
-                            <el-form-item label="账户">
-                                <el-input />
+                        <!-- 表单 -->
+                        <el-form :model="userInfo" :rules="rules" label-position="right" label-width="60px" status-icon>
+                            <el-form-item label="账户" prop="account">
+                                <el-input v-model="userInfo.account" />
                             </el-form-item>
-                            <el-form-item label="密码">
-                                <el-input />
+                            <el-form-item label="密码" prop="password">
+                                <el-input v-model="userInfo.password" />
                             </el-form-item>
-                            <el-form-item label-width="22px">
-                                <el-checkbox size="large">
+                            <el-form-item label-width="22px" prop="agree">
+                                <el-checkbox size="large" v-model="userInfo.agree">
                                     我已同意隐私条款和服务条款
                                 </el-checkbox>
                             </el-form-item>
