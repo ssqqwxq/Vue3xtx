@@ -1,6 +1,6 @@
 // 购物车
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 export const useCartStore = defineStore('cart', () => {
     // 1. 购物车数组
     const cartList = ref([])
@@ -24,10 +24,16 @@ export const useCartStore = defineStore('cart', () => {
         // 筛选 所有 ！==传来的skuId 的item赋值给 cartList.value
         cartList.value = cartList.value.filter((item) => item.skuId !== skuId)
     }
+    // 计算属性   计算购物车总数量
+    const allCount = computed(() => cartList.value.reduce((sum, item) => sum + item.count, 0)
+    )
+    // 计算属性   购物车总价钱
+    const allPrice = computed(() => cartList.value.reduce((sum, item) => sum + item.count * item.price, 0)
+    )
     return {
         cartList,
         getCart,
-        delCart
+        delCart, allPrice, allCount
     }
 },
     // 持久化 存入本地
