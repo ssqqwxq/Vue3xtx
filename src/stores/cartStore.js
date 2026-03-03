@@ -19,9 +19,15 @@ export const useCartStore = defineStore('cart', () => {
             cartList.value.push(goods)
         }
     }
+    // 删除商品
+    const delCart = (skuId) => {
+        // 筛选 所有 ！==传来的skuId 的item赋值给 cartList.value
+        cartList.value = cartList.value.filter((item) => item.skuId !== skuId)
+    }
     return {
         cartList,
-        getCart
+        getCart,
+        delCart
     }
 },
     // 持久化 存入本地
