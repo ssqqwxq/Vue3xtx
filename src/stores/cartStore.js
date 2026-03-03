@@ -25,15 +25,21 @@ export const useCartStore = defineStore('cart', () => {
         cartList.value = cartList.value.filter((item) => item.skuId !== skuId)
     }
     // 计算属性   计算购物车总数量
-    const allCount = computed(() => cartList.value.reduce((sum, item) => sum + item.count, 0)
-    )
+    const allCount = computed(() => cartList.value.reduce((sum, item) => sum + item.count, 0))
     // 计算属性   购物车总价钱
-    const allPrice = computed(() => cartList.value.reduce((sum, item) => sum + item.count * item.price, 0)
-    )
+    const allPrice = computed(() => cartList.value.reduce((sum, item) => sum + item.count * item.price, 0))
+    // 单选框的值手动修改时 通知pinia更改
+    const checkChange = (select, skuId) => {
+        const item = cartList.value.find((item) => item.skuId === skuId)
+        item.selected = select
+    }
     return {
         cartList,
         getCart,
-        delCart, allPrice, allCount
+        delCart,
+        allPrice,
+        allCount,
+        checkChange
     }
 },
     // 持久化 存入本地

@@ -1,7 +1,12 @@
 <script setup>
 import { useCartStore } from '@/stores/cartStore.js'
 const cartStore = useCartStore()
-const cartList = []
+
+// 单选框值变化时 把状态和skuId传过来
+const checkChange = (select, skuId) => {
+    // console.log(select, skuId);//  true/false  12223
+    cartStore.checkChange(select, skuId)
+}
 </script>
 
 <template>
@@ -25,7 +30,8 @@ const cartList = []
                     <tbody>
                         <tr v-for="i in cartStore.cartList" :key="i.id">
                             <td>
-                                <el-checkbox />
+                                <!-- 单选框 -->
+                                <el-checkbox :model-value="i.selected" @change="checkChange($event, i.skuId)" />
                             </td>
                             <td>
                                 <div class="goods">
