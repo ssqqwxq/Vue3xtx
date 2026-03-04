@@ -24,6 +24,10 @@ export const useCartStore = defineStore('cart', () => {
         // 筛选 所有 ！==传来的skuId 的item赋值给 cartList.value
         cartList.value = cartList.value.filter((item) => item.skuId !== skuId)
     }
+    // 全部选中
+    const allCheck = (selected) => {
+        cartList.value.forEach((item) => item.selected = selected)
+    }
     // 计算属性   计算购物车总数量
     const allCount = computed(() => cartList.value.reduce((sum, item) => sum + item.count, 0))
     // 计算属性   购物车总价钱
@@ -33,13 +37,17 @@ export const useCartStore = defineStore('cart', () => {
         const item = cartList.value.find((item) => item.skuId === skuId)
         item.selected = select
     }
+    //  单选控制全选计算属性   每一项都是true every才会返回true  单选控制全选
+    const isAll = computed(() => cartList.value.every((item) => item.selected))
     return {
         cartList,
         getCart,
         delCart,
         allPrice,
         allCount,
-        checkChange
+        checkChange,
+        isAll,
+        allCheck
     }
 },
     // 持久化 存入本地

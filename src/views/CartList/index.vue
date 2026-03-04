@@ -7,6 +7,11 @@ const checkChange = (select, skuId) => {
     // console.log(select, skuId);//  true/false  12223
     cartStore.checkChange(select, skuId)
 }
+// 全选逻辑
+const allCheck = (selected) => {
+    // console.log(selected);
+    cartStore.allCheck(selected)
+}
 </script>
 
 <template>
@@ -17,7 +22,7 @@ const checkChange = (select, skuId) => {
                     <thead>
                         <tr>
                             <th width="120">
-                                <el-checkbox />
+                                <el-checkbox :model-value="cartStore.isAll" @change="allCheck" />
                             </th>
                             <th width="400">商品信息</th>
                             <th width="220">单价</th>
