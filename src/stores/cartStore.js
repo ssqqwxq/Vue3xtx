@@ -28,15 +28,19 @@ export const useCartStore = defineStore('cart', () => {
     const allCheck = (selected) => {
         cartList.value.forEach((item) => item.selected = selected)
     }
-    // 计算属性   计算购物车总数量
+    //1 计算属性   计算购物车总数量
     const allCount = computed(() => cartList.value.reduce((sum, item) => sum + item.count, 0))
-    // 计算属性   购物车总价钱
+    //2 计算属性   购物车总价钱
     const allPrice = computed(() => cartList.value.reduce((sum, item) => sum + item.count * item.price, 0))
-    // 单选框的值手动修改时 通知pinia更改
+    //3 单选框的值手动修改时 通知pinia更改
     const checkChange = (select, skuId) => {
         const item = cartList.value.find((item) => item.skuId === skuId)
         item.selected = select
     }
+    //4 计算属性  已选择数量                            filter()返回的是数组所以可以接着调用reduce()
+    const selectCount = computed(() => cartList.value.filter((item) => item.selected).reduce((sum, item) => sum + item.count, 0))
+    //5 计算属性  已选择价格
+    const selectPrice = computed(() => cartList.value.filter((item) => item.selected).reduce((sum, item) => sum + item.count * item.price, 0))
     //  单选控制全选计算属性   每一项都是true every才会返回true  单选控制全选
     const isAll = computed(() => cartList.value.every((item) => item.selected))
     return {
@@ -47,7 +51,9 @@ export const useCartStore = defineStore('cart', () => {
         allCount,
         checkChange,
         isAll,
-        allCheck
+        allCheck,
+        selectCount,
+        selectPrice
     }
 },
     // 持久化 存入本地
