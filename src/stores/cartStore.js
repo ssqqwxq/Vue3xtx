@@ -51,6 +51,11 @@ export const useCartStore = defineStore('cart', () => {
         }
     }
 
+    // 清除本地购物车数据
+    const clearCartList = () => {
+        cartList.value = []
+    }
+
     // 全部选中
     const allCheck = (selected) => {
         cartList.value.forEach((item) => item.selected = selected)
@@ -82,7 +87,8 @@ export const useCartStore = defineStore('cart', () => {
         isAll,
         allCheck,
         selectCount,
-        selectPrice
+        selectPrice,
+        clearCartList
     }
 },
     // 持久化 存入本地
