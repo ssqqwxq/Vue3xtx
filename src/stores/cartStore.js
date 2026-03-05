@@ -88,7 +88,8 @@ export const useCartStore = defineStore('cart', () => {
         allCheck,
         selectCount,
         selectPrice,
-        clearCartList
+        clearCartList,
+        upCartList
     }
 },
     // 持久化 存入本地
